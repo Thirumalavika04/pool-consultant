@@ -1,0 +1,806 @@
+
+:root {
+    --brand-blue: #005f9e;
+    --brand-light-blue: #e6f3ff;
+    --dark-gray: #333;
+    --medium-gray: #666;
+    --light-gray: #f4f4f9;
+    --border-gray: #ddd;
+    --white: #fff;
+    --green: #28a745;
+    --orange: #fd7e14;
+    --red: #dc3545;
+    --font-family: 'Roboto', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--light-gray);
+    color: var(--dark-gray);
+    line-height: 1.6;
+}
+
+#app-root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+#app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Login Page Styles --- */
+#login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    padding: 2rem;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.login-container h2 {
+    text-align: center;
+    color: var(--brand-blue);
+    margin-bottom: 1.5rem;
+}
+
+.login-tabs {
+    display: flex;
+    margin-bottom: 1.5rem;
+}
+
+.login-tabs button {
+    flex: 1;
+    padding: 0.75rem;
+    border: none;
+    background: var(--light-gray);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--medium-gray);
+    transition: all 0.3s ease;
+}
+
+.login-tabs button.active {
+    background: var(--brand-blue);
+    color: var(--white);
+}
+
+.login-tabs button:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.login-tabs button:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 5px;
+    border: 1px solid var(--border-gray);
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.login-form button {
+    width: 100%;
+}
+
+.error-message {
+    color: var(--red);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+/* --- Main App Styles --- */
+header {
+    background: var(--white);
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+header h1 {
+    color: var(--brand-blue);
+    font-size: 1.5rem;
+}
+
+header nav button {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--brand-blue);
+    background-color: var(--white);
+    color: var(--brand-blue);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 5px;
+    transition: all 0.2s ease-in-out;
+}
+
+header nav button:hover {
+    background-color: var(--brand-blue);
+    color: var(--white);
+}
+
+main {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    flex-grow: 1;
+}
+
+.view-container {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.view-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-gray);
+}
+
+.view-header h2 {
+    color: var(--dark-gray);
+}
+
+/* Common Form & Button Styles */
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--medium-gray);
+}
+
+button.primary-btn, button.secondary-btn {
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+button.primary-btn {
+    background-color: var(--brand-blue);
+    color: var(--white);
+}
+
+button.secondary-btn {
+    background-color: var(--light-gray);
+    color: var(--dark-gray);
+    border: 1px solid var(--border-gray);
+}
+
+button.primary-btn:hover:not(:disabled) {
+    background-color: #004a7c;
+}
+button.secondary-btn:hover:not(:disabled) {
+    background-color: #e2e6ea;
+}
+
+
+button:disabled {
+    background-color: #a0a0a0;
+    cursor: not-allowed;
+    color: white;
+}
+
+/* Consultant Dashboard */
+.dashboard-grid, .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.card {
+    background: var(--light-gray);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-left: 5px solid var(--brand-blue);
+}
+
+.card h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: var(--medium-gray);
+}
+
+.card p.status {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.card p.status.updated, .card p.status.completed { color: var(--green); }
+.card p.status.pending, .card p.status.not-started { color: var(--orange); }
+.card p.status.in-progress { color: var(--brand-blue); }
+
+
+/* Workflow Section */
+.workflow-section {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: #fdfdfd;
+    border: 1px solid var(--border-gray);
+    border-radius: 8px;
+}
+
+.workflow-section h3 {
+     margin-bottom: 1rem;
+     color: var(--brand-blue);
+}
+
+.progress-bar-container {
+    background: var(--light-gray);
+    border-radius: 20px;
+    overflow: hidden;
+    height: 20px;
+    width: 100%;
+}
+
+.progress-bar-segment {
+    background: var(--brand-blue);
+    height: 100%;
+    width: 0;
+    transition: width 0.5s ease-in-out;
+}
+
+.workflow-steps {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 0.75rem;
+}
+
+.workflow-step {
+    font-size: 0.9rem;
+    color: var(--medium-gray);
+    text-align: center;
+}
+.workflow-step.completed {
+    color: var(--dark-gray);
+    font-weight: 500;
+}
+.workflow-step.completed::before {
+    content: '✔ ';
+    color: var(--green);
+}
+
+/* --- Agent Tabs (Consultant View) --- */
+.agent-container {
+    margin-top: 2rem;
+    border: 1px solid var(--border-gray);
+    border-radius: 8px;
+    background: var(--white);
+    overflow: hidden;
+}
+
+.agent-tabs {
+    display: flex;
+    background-color: var(--light-gray);
+}
+
+.agent-tab {
+    flex: 1;
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--medium-gray);
+    transition: all 0.3s ease;
+}
+
+.agent-tab:hover {
+    background-color: #e9ecef;
+}
+
+.agent-tab.active {
+    color: var(--brand-blue);
+    border-bottom-color: var(--brand-blue);
+}
+
+.agent-tab-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    animation: fadeIn 0.3s;
+}
+
+.agent-tab-content h3 {
+    color: var(--brand-blue);
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-gray);
+    margin-bottom: 1rem;
+}
+
+.agent-tab-content .form-group {
+    display: flex;
+    gap: 0.5rem;
+}
+.agent-tab-content .form-group input {
+    flex-grow: 1;
+    padding: 0.75rem;
+    border-radius: 5px;
+    border: 1px solid var(--border-gray);
+    font-size: 0.9rem;
+}
+
+
+/* Custom File Upload */
+.file-upload-wrapper {
+    margin-top: 1rem;
+}
+
+.file-upload-label {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--brand-blue);
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.file-upload-label:hover {
+    background-color: #004a7c;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+#file-name {
+    margin-left: 1rem;
+    color: var(--medium-gray);
+    font-style: italic;
+}
+
+
+/* Resume Analytics */
+#resume-analytics {
+    margin-top: 1rem;
+    background-color: var(--brand-light-blue);
+    border-radius: 8px;
+    padding: 1.5rem;
+    animation: fadeIn 0.5s;
+}
+
+#resume-analytics h4 {
+    color: var(--brand-blue);
+    margin-bottom: 1rem;
+}
+
+.analytics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.analytics-item {
+    background: white;
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+.analytics-item h5 {
+    color: var(--medium-gray);
+    margin-bottom: 0.5rem;
+}
+
+.analytics-item p, .analytics-item ul {
+    font-size: 0.95rem;
+}
+
+.analytics-item ul {
+    list-style-type: none;
+    padding-left: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.analytics-item li {
+    background-color: var(--light-gray);
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.85rem;
+}
+
+/* Training Journey */
+.training-journey-section {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: var(--brand-light-blue);
+    border-radius: 8px;
+}
+
+.training-journey-section h3 {
+    color: var(--brand-blue);
+    margin-bottom: 1rem;
+}
+
+.training-journey-content ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.training-journey-content li {
+    background: var(--white);
+    padding: 0.75rem;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+    border-left: 3px solid var(--green);
+    font-size: 0.95rem;
+}
+
+/* Opportunity Log */
+.opportunity-log-content ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.opportunity-log-content li {
+    background: var(--white);
+    padding: 0.75rem;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+    border-left: 3px solid var(--brand-blue);
+    font-size: 0.95rem;
+}
+
+/* Meeting List */
+.meeting-list {
+    list-style: none;
+    padding: 0;
+}
+.meeting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-gray);
+}
+.meeting-item:last-child {
+    border-bottom: none;
+}
+.meeting-title {
+    font-weight: 500;
+}
+.meeting-details {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.meeting-details .status {
+    font-weight: 500;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    min-width: 80px;
+    text-align: center;
+}
+.meeting-details .status.attended {
+    background-color: var(--brand-light-blue);
+    color: var(--green);
+    border: 1px solid var(--green);
+}
+.meeting-details .status.pending {
+    background-color: #fff8e1;
+    color: var(--orange);
+    border: 1px solid var(--orange);
+}
+.meeting-notes {
+    font-size: 0.9rem;
+    color: var(--medium-gray);
+    font-style: italic;
+}
+.log-attendance-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+/* Admin View */
+.admin-section {
+    padding: 1.5rem;
+    background: #fdfdfd;
+    border: 1px solid var(--border-gray);
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.filters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    align-items: flex-end;
+    margin-bottom: 1.5rem;
+}
+
+.filters select, .filters input {
+     width: 100%;
+    padding: 0.75rem;
+    border-radius: 5px;
+    border: 1px solid var(--border-gray);
+    font-size: 1rem;
+}
+
+.consultant-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+.consultant-table th, .consultant-table td {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border-gray);
+    vertical-align: middle;
+}
+
+.consultant-table th {
+    background: var(--brand-light-blue);
+    color: var(--brand-blue);
+    font-weight: 500;
+}
+
+.consultant-table tbody tr:hover {
+    background-color: var(--light-gray);
+}
+
+.skills-cell-content {
+    max-height: 65px;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 4px 0;
+}
+
+.skill-tag {
+    background-color: var(--brand-light-blue);
+    color: var(--brand-blue);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    border: 1px solid var(--border-gray);
+    white-space: nowrap;
+}
+
+/* Custom Scrollbar for skills */
+.skills-cell-content::-webkit-scrollbar {
+    width: 6px;
+}
+.skills-cell-content::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+    border-radius: 3px;
+}
+.skills-cell-content::-webkit-scrollbar-thumb {
+    background: #ccc; 
+    border-radius: 3px;
+}
+.skills-cell-content::-webkit-scrollbar-thumb:hover {
+    background: var(--medium-gray); 
+}
+
+
+.consultant-table .action-buttons {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.consultant-table .action-btn {
+    border: none;
+    background: none;
+    padding: 0.4rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    color: white;
+    width: 32px;
+    height: 32px;
+    font-size: 1.1rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.consultant-table .edit-btn { background: var(--orange); }
+.consultant-table .edit-btn:hover { background: #e66a00; }
+
+.consultant-table .log-opp-btn { background: var(--brand-blue); }
+.consultant-table .log-opp-btn:hover { background: #004a7c; }
+
+.consultant-table .analyze-att-btn { background: var(--green); }
+.consultant-table .analyze-att-btn:hover { background: #218838; }
+
+.consultant-table .delete-btn { background: var(--red); }
+.consultant-table .delete-btn:hover { background: #c82333; }
+
+.department-analytics-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.department-analytics-controls select {
+    padding: 0.75rem;
+    border-radius: 5px;
+    border: 1px solid var(--border-gray);
+    font-size: 1rem;
+}
+
+/* --- Modal Styles --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    animation: slideIn 0.3s ease-out;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-gray);
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+
+.modal-header h2 {
+    color: var(--brand-blue);
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.modal-close-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--medium-gray);
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.modal-close-btn:hover {
+    color: var(--dark-gray);
+}
+
+.modal-body p {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Edit Modal Specifics */
+.edit-modal-content .form-group-vertical {
+    margin-bottom: 1rem;
+}
+.edit-modal-content .form-group-vertical label {
+    font-weight: 500;
+    color: var(--dark-gray);
+}
+.edit-modal-content .form-group-vertical input,
+.edit-modal-content .form-group-vertical select {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 5px;
+    border: 1px solid var(--border-gray);
+    font-size: 1rem;
+}
+.edit-modal-content .form-actions {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.loader, .loader-small {
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    border-bottom-color: transparent;
+}
+
+.loader {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #FFF;
+}
+.loader-small {
+    width: 14px;
+    height: 14px;
+    border: 2px solid #FFF;
+}
+
+footer {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1rem;
+    font-size: 0.8rem;
+    color: var(--medium-gray);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes rotation {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    main { padding: 1rem; }
+    .analytics-grid { grid-template-columns: 1fr; }
+    .department-analytics-controls { flex-direction: column; align-items: stretch;}
+    .meeting-item { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+}
